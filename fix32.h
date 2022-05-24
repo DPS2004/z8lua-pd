@@ -25,9 +25,9 @@ struct fix32
     inline fix32() = default;
 
     // Convert from/to double
-    inline fix32(double d)
-      : m_bits(int32_t(int64_t(d * 65536.0)))
-    {}
+    //inline fix32(double d)
+    //  : m_bits(int32_t(int64_t(d * 65536.0)))
+    //{}
 
     inline operator double() const
     {
@@ -36,18 +36,18 @@ struct fix32
 
     // Conversions up to int16_t are safe.
     inline fix32(int8_t x)  : m_bits(int32_t(x << 16)) {}
-    inline fix32(uint8_t x) : m_bits(int32_t(x << 16)) {}
-    inline fix32(int16_t x) : m_bits(int32_t(x << 16)) {}
+    //inline fix32(uint8_t x) : m_bits(int32_t(x << 16)) {}
+    //inline fix32(int16_t x) : m_bits(int32_t(x << 16)) {}
 
     // Anything above int16_t is risky because of precision loss, but Lua
     // does too many implicit conversions from int that we can’t mark this
     // one as explicit.
-    inline fix32(int32_t x)  : m_bits(int32_t(x << 16)) {}
+    //inline fix32(int32_t x)  : m_bits(int32_t(x << 16)) {}
     
-    inline explicit fix32(uint16_t x) : m_bits(int32_t(x << 16)) {}
-    inline explicit fix32(uint32_t x) : m_bits(int32_t(x << 16)) {}
-    inline explicit fix32(int64_t x)  : m_bits(int32_t(x << 16)) {}
-    inline explicit fix32(uint64_t x) : m_bits(int32_t(x << 16)) {}
+    //inline explicit fix32(uint16_t x) : m_bits(int32_t(x << 16)) {}
+    //inline explicit fix32(uint32_t x) : m_bits(int32_t(x << 16)) {}
+    //inline explicit fix32(int64_t x)  : m_bits(int32_t(x << 16)) {}
+    //inline explicit fix32(uint64_t x) : m_bits(int32_t(x << 16)) {}
     
     // Support for long and unsigned long when it is a distinct
     // type from the standard int*_t types, e.g. on Windows.
@@ -187,7 +187,7 @@ struct fix32
 
     static fix32 pow(fix32 x, int y) 
     {
-        fix32 res = 1;
+        fix32 res = 1.0;
         if (y > 0) {
             for(int i = 0; i < y; i++) {
                 res *= x;
